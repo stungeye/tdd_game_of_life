@@ -17,4 +17,8 @@ class Life
     end
     output
   end
+
+  def next_gen
+    Life.new [], @width, @height
+  end
 end

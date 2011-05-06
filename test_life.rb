@@ -42,4 +42,14 @@ describe Life do
     end
   end
 
+  describe "when created with all lonely cells" do
+    it "must kill off all those cells" do
+      @cells = [[0,0], [2,0], [4,0],
+                [0,2], [2,2], [4,2],
+                [0,4], [2,4], [4,4]]
+      @life = Life.new @cells, 5, 5
+      @next_gen = @life.next_gen
+      @next_gen.cells.must_equal []
+    end
+  end
 end
