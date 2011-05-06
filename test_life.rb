@@ -18,7 +18,7 @@ describe Life do
     it "must contain an empty cells array" do
       @life.cells.must_equal @cells
     end
-    it "must be able to convert these cells to the correct string" do
+    it "must be able to to_s these cells to the correct string" do
       output_string = "-----\n" * 5
       @life.to_s.must_equal output_string
     end
@@ -32,12 +32,12 @@ describe Life do
     it "must contain that same cell array" do
       @life.cells.must_equal @cells
     end
-    it "must be able to convert these cells to the correct string" do
+    it "must be able to to_s these cells to the correct string" do
       output_string =  "-----\n"
       output_string << "-*---\n"
       output_string << "--*--\n"
       output_string << "--*--\n"
-      output_string <<  "-----\n"
+      output_string << "-----\n"
       @life.to_s.must_equal output_string
     end
   end
