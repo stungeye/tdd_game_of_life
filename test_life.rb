@@ -42,14 +42,30 @@ describe Life do
     end
   end
 
-  describe "when created with all lonely cells" do
-    it "must kill off all those cells" do
+  describe "when created with only lonely cells" do
+    it "must kill off all lonely cells" do
       @cells = [[0,0], [2,0], [4,0],
                 [0,2], [2,2], [4,2],
                 [0,4], [2,4], [4,4]]
       @life = Life.new @cells, 5, 5
       @next_gen = @life.next_gen
       @next_gen.cells.must_equal []
+    end
+  end
+
+  describe "when cells have neighbours" do
+    #it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
+    #  @life = Life.new [], 5, 5
+    #  @life.neighbours(-1, -1).must_raise RuntimeError
+    #end
+    it "must return the correct number of neighbours" do
+      @cells = [[0,0], [3,0], [4,0],
+                       [3,1], [4,1],
+                [1,2], [2,2], [3,2],
+                [1,3], [2,3], [3,3],
+                [1,4], [2,4], [3,4]]
+      @life = Life.new @cells, 5, 5
+      @life.neighbours(0, 0).must_equal 0
     end
   end
 end
