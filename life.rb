@@ -41,4 +41,8 @@ class Life
   def out_of_bounds x, y
     x < 0 || x >= @width || y < 0 || y >= @height
   end
+
+  def alive? x, y
+    @cells.include? [x, y]
+  end
 end

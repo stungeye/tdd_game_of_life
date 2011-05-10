@@ -29,7 +29,15 @@ describe Life do
     # -----
     # *-*-*
     @lonely_life = Life.new @lonely_cells, 5, 5
-    puts @lonely_life.to_s
+
+    @underpopulated_cells = [[0,0],
+                             [0,2],[1,2]]
+    # Underpopulated Cells:
+    # *---
+    # ----
+    # **--
+    # ----
+    @underpopulated_life = Life.new @underpopulated_cells, 4, 4
   end
 
   describe "when asked for its class" do
@@ -56,13 +64,6 @@ describe Life do
     end
   end
 
-  describe "when created with only lonely cells" do
-    it "must kill off all lonely cells" do
-      @next_gen = @lonely_life.next_gen
-      @next_gen.cells.must_equal []
-    end
-  end
-
   describe "when cells have neighbours" do
     it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
       # Why is the lambda needed? Fails without it when the exception is raised.
@@ -80,6 +81,23 @@ describe Life do
       @crowded_life.neighbours(2, 3).must_equal 8
     end
   end
+
+  describe "when created with only lonely cells" do
+    it "must kill off all lonely cells" do
+      @next_gen = @lonely_life.next_gen
+      @next_gen.cells.must_equal @empty_cells
+    end
+  end
+
+  describe "when live cells have less than 2 neighbours" do
+    it "must kill off those cells" do
+      @next_gen = @underpopulated_life.next_gen
+      @next_gen.alive?(0,0).must_equal false
+      @next_gen.alive?(0,2).must_equal false
+      @next_gen.alive?(1,2).must_equal false
+    end
+  end
+
 end
 
 
