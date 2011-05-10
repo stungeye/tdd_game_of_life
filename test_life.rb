@@ -63,7 +63,33 @@ describe Life do
     # *--*---
     # -**----
     @static_life = Life.new @static_cells, 7, 7
+
+    @periodic_one_cells = [[1,0], [5,0], [6,0],
+                           [1,1], [5,1], 
+                           [1,2],
+                           [8,2],
+                           [7,3], [8,3]]
+    # Periodic One Cells (Blinker and Beacon)
+    # -*---**--
+    # -*---*---
+    # -*------*
+    # -------**
+    @periodic_one_life = Life.new @periodic_one_cells, 9, 4
+
+    @periodic_two_cells = [[5,0], [6,0],
+                           [0,1], [1,1], [2,1], [5,1], [6,1],
+                           [7,2], [8,2],
+                           [7,3], [8,3]]
+    # Periodic Two Cells (Blinker and Beacon)
+    # -----**--
+    # ***--**--
+    # -------**
+    # -------**
+    @periodic_two_life = Life.new @periodic_two_cells, 9, 4
   end
+
+
+
 
 
   describe "when asked for its class" do
@@ -145,15 +171,21 @@ describe Life do
 
   describe "when all structres are static" do
     it "must leave these structures alone" do
-      puts "Before:"
-      puts @static_life.to_s
       @next_gen = @static_life.next_gen
-      puts "After:"
-      puts @next_gen.to_s
       @next_gen.cells.must_equal @static_cells
     end
   end
 
+  describe "when structures are period two oscillators" do
+    it "must properly transform to the second form" do
+      @next_gen = @periodic_one_life.next_gen
+      @next_gen.cells.must_equal @periodic_two_cells
+    end
+    it "must transform back from the second form to the first" do
+      @next_gen = @periodic_two_life.next_gen
+      @next_gen.cells.must_equal @periodic_one_cells
+    end
+  end
 
 end
 
