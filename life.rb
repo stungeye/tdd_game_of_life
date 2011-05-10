@@ -11,9 +11,9 @@ class Life
   
   def to_s 
     output = ""
-    @height.times do |h|
-      @width.times do |w|
-        output << (@cells.include?([w,h]) ? '*' : '-')
+    @height.times do |y|
+      @width.times do |x|
+        output << (@cells.include?([x,y]) ? '*' : '-')
       end
       output << "\n"
     end
@@ -21,7 +21,14 @@ class Life
   end
 
   def next_gen
-    Life.new [], @width, @height
+    @next_cells = []
+    @height.times do |y|
+      @width.times do |x|
+        @next_cells << [x,y]  if alive?(x,y) && (2..3).include?(neighbours(x,y))
+        @next_cells << [x,y]  if dead?(x,y) && neighbours(x,y) == 3
+      end
+    end
+    Life.new @next_cells, @width, @height
   end
 
   def neighbours x, y
@@ -44,5 +51,9 @@ class Life
 
   def alive? x, y
     @cells.include? [x, y]
+  end
+
+  def dead? x,y
+    !alive? x, y
   end
 end

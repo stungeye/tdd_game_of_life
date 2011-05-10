@@ -38,7 +38,33 @@ describe Life do
     # **--
     # ----
     @underpopulated_life = Life.new @underpopulated_cells, 4, 4
+
+    @goldylocks_cells = [[1,1],
+                        [0,2], [1,2], [2,2]]
+    # Goldylock Cells:
+    # ----
+    # -*--
+    # ***-
+    # ----
+    @goldylocks_life = Life.new @goldylocks_cells, 4, 4
+
+    @static_cells = [[0,0], [1,0], [4,0], [5,0],
+                     [0,1], [1,1], [4,1], [6,1],
+                     [5,2],
+                     [1,4], [2,4],
+                     [0,5], [3,5],
+                     [1,6], [2,6]]
+    # Static Cells: (Includes block, boat and beehive)
+    # **--**-
+    # **--*-*
+    # -----*-
+    # -------
+    # -**----
+    # *--*---
+    # -**----
+    @static_life = Life.new @static_cells, 7, 7
   end
+
 
   describe "when asked for its class" do
     it "must response with Life" do
@@ -97,6 +123,37 @@ describe Life do
       @next_gen.alive?(1,2).must_equal false
     end
   end
+
+  describe "when all live cells have 2 or three neighbours" do
+    it "must keep all those cells alive" do
+      @next_gen = @goldylocks_life.next_gen
+      (@next_gen.alive?(1,1) &&
+      @next_gen.alive?(0,2) &&
+      @next_gen.alive?(1,2) &&
+      @next_gen.alive?(2,2)).must_equal true
+    end
+  end
+
+  describe "when a dead cell has 3 neighbours" do
+    it "must be revived" do
+      @next_gen = @goldylocks_life.next_gen
+      (@next_gen.alive?(0,1) &&
+      @next_gen.alive?(2,1) &&
+      @next_gen.alive?(1,3)).must_equal true
+    end
+  end
+
+  describe "when all structres are static" do
+    it "must leave these structures alone" do
+      puts "Before:"
+      puts @static_life.to_s
+      @next_gen = @static_life.next_gen
+      puts "After:"
+      puts @next_gen.to_s
+      @next_gen.cells.must_equal @static_cells
+    end
+  end
+
 
 end
 
