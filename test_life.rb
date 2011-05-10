@@ -69,9 +69,10 @@ describe Life do
   end
 
   describe "when cells have neighbours" do
-    #it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
-    #  @crowded_life.neighbours(-1, -1).must_raise RuntimeError
-    #end
+    it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
+      # Why is the lambda needed? Fails without it when the exception is raised.
+      lambda {@crowded_life.neighbours(-1, -1)}.must_raise Life::OutOfBoundsError
+    end
     it "must return the correct number of neighbours" do
       @crowded_life.neighbours(0, 0).must_equal 0
       @crowded_life.neighbours(1, 0).must_equal 1
