@@ -34,7 +34,7 @@ class Life
   end
 
   def neighbour? x1, y1, x2, y2
-    return false  if x1 == x2 && y1 == y2
+    return false  if x1 == x2 && y1 == y2 # You are not your own neighbour!
     (x1 - x2).abs <= 1 && (y1 - y2).abs <= 1
   end
 

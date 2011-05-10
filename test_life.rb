@@ -4,31 +4,32 @@ require_relative 'life'
 describe Life do
   before do
     @empty_cells = []
+    @empty_string = "-----\n" * 5
     @empty_life  = Life.new @empty_cells, 5, 5 
 
-    # Crowded Cells:
-    # *--**
-    # ---**
-    # -***-
-    # ****-
-    # *****
     @crowded_cells = [[0,0], [3,0], [4,0],
                       [3,1], [4,1],
                       [1,2], [2,2], [3,2],
                       [0,3], [1,3], [2,3], [3,3],
                       [0,4], [1,4], [2,4], [3,4], [4,4]]
+    @crowded_string =  "*--**\n"
+    @crowded_string << "---**\n"
+    @crowded_string << "-***-\n"
+    @crowded_string << "****-\n"
+    @crowded_string << "*****\n"
     @crowded_life = Life.new @crowded_cells, 5, 5
 
+    @lonely_cells = [[0,0], [2,0], [4,0],
+                     [0,2], [2,2], [4,2],
+                     [0,4], [2,4], [4,4]]
     # Lonely Cells:
     # *-*-*
     # -----
     # *-*-*
     # -----
     # *-*-*
-    @lonely_cells = [[0,0], [2,0], [4,0],
-                     [0,2], [2,2], [4,2],
-                     [0,4], [2,4], [4,4]]
     @lonely_life = Life.new @lonely_cells, 5, 5
+    puts @lonely_life.to_s
   end
 
   describe "when asked for its class" do
@@ -42,8 +43,7 @@ describe Life do
       @empty_life.cells.must_equal @empty_cells
     end
     it "must be able to to_s these cells to the correct string" do
-      output_string = "-----\n" * 5
-      @empty_life.to_s.must_equal output_string
+      @empty_life.to_s.must_equal @empty_string
     end
   end
 
@@ -52,12 +52,7 @@ describe Life do
       @crowded_life.cells.must_equal @crowded_cells
     end
     it "must be able to to_s these cells to the correct string" do
-      output_string =  "*--**\n"
-      output_string << "---**\n"
-      output_string << "-***-\n"
-      output_string << "****-\n"
-      output_string << "*****\n"
-      @crowded_life.to_s.must_equal output_string
+      @crowded_life.to_s.must_equal @crowded_string
     end
   end
 
