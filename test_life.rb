@@ -69,7 +69,7 @@ describe Life do
                            [1,2],
                            [8,2],
                            [7,3], [8,3]]
-    # Periodic One Cells (Blinker and Beacon)
+    # Periodic Cells First Form (Blinker and Beacon)
     # -*---**--
     # -*---*---
     # -*------*
@@ -80,17 +80,13 @@ describe Life do
                            [0,1], [1,1], [2,1], [5,1], [6,1],
                            [7,2], [8,2],
                            [7,3], [8,3]]
-    # Periodic Two Cells (Blinker and Beacon)
+    # Periodic Cells Second Form (Blinker and Beacon)
     # -----**--
     # ***--**--
     # -------**
     # -------**
     @periodic_two_life = Life.new @periodic_two_cells, 9, 4
   end
-
-
-
-
 
   describe "when asked for its class" do
     it "must response with Life" do
