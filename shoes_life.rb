@@ -3,8 +3,9 @@ require 'life'
 class GlassBeadGame
   def initialize(cells, width, height, app)
     @app = app
-    @cell_width = @app.width / width
-    @cell_height = @app.height / height
+    @app.nostroke
+    @cell_width = @app.width  / width 
+    @cell_height = @app.height / height 
     @life = Life.new cells, width, height  
   end
 
@@ -17,7 +18,6 @@ class GlassBeadGame
     @life.cells.each do |coordinates|
       x = coordinates[0]
       y = coordinates[1]
-      @app.stroke rgb(0x30, 0x30, 0x40)
       if @life.should_remain_alive?(x, y)
         @app.fill rgb(0x30, 0x30, 0xBB)
       else
@@ -50,10 +50,10 @@ class GlassBeadGame
   end
 end
 
-Shoes.app(:title => 'TDD Game of Life', :height => 600, :width => 600) do
+Shoes.app(:title => 'TDD Game of Life', :height => 500, :width => 500) do
   
   app = self
-  gbg = GlassBeadGame.new [], 30, 30, app
+  gbg = GlassBeadGame.new [], 50, 50, app
   gbg.randomize_cells!
 
   click do |button, x, y|

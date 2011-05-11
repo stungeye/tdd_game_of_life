@@ -114,7 +114,7 @@ describe Life do
 
   describe "when cells have neighbours" do
     it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
-      # Why is the lambda needed? Fails without it when the exception is raised.
+      # Why is the lambda needed? The test fails without it when the exception is raised.
       lambda {@crowded_life.neighbours(-1, -1)}.must_raise Life::OutOfBoundsError
     end
     it "must return the correct number of neighbours" do
