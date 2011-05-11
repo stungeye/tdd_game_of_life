@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>shoes_life.rb</title>
+  <link rel="stylesheet" href="http://github.com/jashkenas/docco/raw/0.3.0/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="life.html">life.rb</a>
+          <a class="source" href="shoes_life.html">shoes_life.rb</a>
+          <a class="source" href="test_life.html">test_life.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>shoes_life.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>A simple <a href="http://shoesrb.com">Shoes</a> app to visualize
+<a href="index.html">my implementation</a> of <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway&rsquo;s Game of life</a>.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;life&#39;</span>
+
+<span class="k">class</span> <span class="nc">GlassBeadGame</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
+    <span class="vi">@app</span> <span class="o">=</span> <span class="n">app</span>
+    <span class="vi">@app</span><span class="o">.</span><span class="n">nostroke</span>
+    <span class="vi">@cell_width</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">width</span>  <span class="o">/</span> <span class="n">width</span> 
+    <span class="vi">@cell_height</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">height</span> 
+    <span class="vi">@life</span> <span class="o">=</span> <span class="no">Life</span><span class="o">.</span><span class="n">new</span> <span class="n">cells</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span>  
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">tick</span>
+    <span class="vi">@life</span> <span class="o">=</span> <span class="vi">@life</span><span class="o">.</span><span class="n">next_gen</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">draw</span>
+    <span class="vi">@app</span><span class="o">.</span><span class="n">clear</span>
+    <span class="vi">@life</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">coordinates</span><span class="o">|</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">coordinates</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">coordinates</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+      <span class="k">if</span> <span class="vi">@life</span><span class="o">.</span><span class="n">should_remain_alive?</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="vi">@app</span><span class="o">.</span><span class="n">fill</span> <span class="n">rgb</span><span class="p">(</span><span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0xBB</span><span class="p">)</span>
+      <span class="k">else</span>
+        <span class="vi">@app</span><span class="o">.</span><span class="n">fill</span> <span class="n">rgb</span><span class="p">(</span><span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">)</span>
+      <span class="k">end</span>
+      <span class="vi">@app</span><span class="o">.</span><span class="n">rect</span> <span class="ss">:left</span> <span class="o">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="vi">@cell_width</span><span class="p">,</span>
+                <span class="ss">:top</span> <span class="o">=&gt;</span> <span class="n">y</span> <span class="o">*</span> <span class="vi">@cell_height</span><span class="p">,</span> 
+                <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="vi">@cell_width</span><span class="p">,</span>
+                <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="vi">@cell_height</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="mi">1</span> 
+      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="vi">@cell_width</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="vi">@cell_height</span>
+      <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">draw</span>
+    <span class="k">else</span>
+      <span class="n">randomize_cells!</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">randomize_cells!</span>
+    <span class="vi">@life</span><span class="o">.</span><span class="n">height</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">y</span><span class="o">|</span>
+      <span class="vi">@life</span><span class="o">.</span><span class="n">width</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+        <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>  <span class="k">if</span> <span class="nb">rand</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s1">&#39;TDD Game of Life&#39;</span><span class="p">,</span> <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="k">do</span>
+  
+  <span class="n">app</span> <span class="o">=</span> <span class="nb">self</span>
+  <span class="n">gbg</span> <span class="o">=</span> <span class="no">GlassBeadGame</span><span class="o">.</span><span class="n">new</span> <span class="o">[]</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">app</span>
+  <span class="n">gbg</span><span class="o">.</span><span class="n">randomize_cells!</span>
+
+  <span class="n">click</span> <span class="k">do</span> <span class="o">|</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">|</span>
+    <span class="n">gbg</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
+  <span class="k">end</span>
+
+  <span class="n">animate</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">gbg</span><span class="o">.</span><span class="n">tick</span>
+    <span class="n">gbg</span><span class="o">.</span><span class="n">draw</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
