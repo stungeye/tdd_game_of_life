@@ -1,6 +1,6 @@
 ## Test Driving Conway's Game of Life
 
-Pending...
+An experiement in test-driven development using Minitest.
 
 ## Unlicense
 

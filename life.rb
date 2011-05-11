@@ -1,5 +1,5 @@
 class Life
-  attr_reader :cells
+  attr_reader :cells, :width, :height
 
   class OutOfBoundsError < ArgumentError; end
 
@@ -24,8 +24,8 @@ class Life
     @next_cells = []
     @height.times do |y|
       @width.times do |x|
-        @next_cells << [x,y]  if alive?(x,y) && (2..3).include?(neighbours(x,y))
-        @next_cells << [x,y]  if dead?(x,y) && neighbours(x,y) == 3
+        @next_cells << [x,y]  if should_remain_alive?(x, y)
+        @next_cells << [x,y]  if should_come_to_life?(x, y)
       end
     end
     Life.new @next_cells, @width, @height
@@ -49,11 +49,23 @@ class Life
     x < 0 || x >= @width || y < 0 || y >= @height
   end
 
+  def should_remain_alive?(x,y)
+    alive?(x,y) && (2..3).include?(neighbours(x,y))
+  end
+
+  def should_come_to_life?(x, y)
+    dead?(x,y) && neighbours(x,y) == 3
+  end
+
   def alive?(x, y)
     @cells.include?([x, y])
   end
 
   def dead?(x,y)
     !alive?(x, y)
+  end
+
+  def set_cell_alive(x, y)
+    @cells << [x, y]  if !alive?(x,y)
   end
 end

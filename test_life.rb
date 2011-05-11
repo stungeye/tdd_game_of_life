@@ -183,6 +183,15 @@ describe Life do
     end
   end
 
+  describe "when a cell it set as alive" do
+    it "must be read back as alive" do
+      @life = @empty_life
+      @life.set_cell_alive 2, 2
+      @life.alive?(2, 2).must_equal true
+    end
+  end
+
+
 end
 
 
