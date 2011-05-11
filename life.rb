@@ -50,7 +50,7 @@ class Life
   end
 
   def alive?(x, y)
-    @cells.include? [x, y]
+    @cells.include?([x, y])
   end
 
   def dead?(x,y)
