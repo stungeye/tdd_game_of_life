@@ -1,3 +1,9 @@
+# These are the [Minitest][mt] specs for 
+# [my implementation](index.html) of [Conway's Game of life][gl].
+#
+# [mt]:  http://github.com/seattlerb/minitest
+# [gl]: http://en.wikipedia.org/wiki/Conway's_Game_of_Life
+
 require 'minitest/autorun'
 require_relative 'life'
 
@@ -22,30 +28,30 @@ describe Life do
     @lonely_cells = [[0,0], [2,0], [4,0],
                      [0,2], [2,2], [4,2],
                      [0,4], [2,4], [4,4]]
-    # Lonely Cells:
-    # *-*-*
-    # -----
-    # *-*-*
-    # -----
-    # *-*-*
+    # Lonely Cells:  
+    # `*-*-*`  
+    # `-----`  
+    # `*-*-*`  
+    # `-----`  
+    # `*-*-*`  
     @lonely_life = Life.new @lonely_cells, 5, 5
 
     @underpopulated_cells = [[0,0],
                              [0,2],[1,2]]
-    # Underpopulated Cells:
-    # *---
-    # ----
-    # **--
-    # ----
+    # Underpopulated Cells:  
+    # `*---`  
+    # `----`  
+    # `**--`  
+    # `----`  
     @underpopulated_life = Life.new @underpopulated_cells, 4, 4
 
     @goldylocks_cells = [[1,1],
                         [0,2], [1,2], [2,2]]
-    # Goldylock Cells:
-    # ----
-    # -*--
-    # ***-
-    # ----
+    # Goldylock Cells:  
+    # `----`  
+    # `-*--`  
+    # `***-`  
+    # `----`  
     @goldylocks_life = Life.new @goldylocks_cells, 4, 4
 
     @static_cells = [[0,0], [1,0], [4,0], [5,0],
@@ -54,14 +60,14 @@ describe Life do
                      [1,4], [2,4],
                      [0,5], [3,5],
                      [1,6], [2,6]]
-    # Static Cells: (Includes block, boat and beehive)
-    # **--**-
-    # **--*-*
-    # -----*-
-    # -------
-    # -**----
-    # *--*---
-    # -**----
+    # Static Cells (Includes block, boat and beehive):  
+    # `**--**-`  
+    # `**--*-*`  
+    # `-----*-`  
+    # `-------`  
+    # `-**----`  
+    # `*--*---`  
+    # `-**----`  
     @static_life = Life.new @static_cells, 7, 7
 
     @periodic_one_cells = [[1,0], [5,0], [6,0],
@@ -69,22 +75,22 @@ describe Life do
                            [1,2],
                            [8,2],
                            [7,3], [8,3]]
-    # Periodic Cells First Form (Blinker and Beacon)
-    # -*---**--
-    # -*---*---
-    # -*------*
-    # -------**
+    # Periodic Cells First Form (Blinker and Beacon):  
+    # `-*---**--`  
+    # `-*---*---`  
+    # `-*------*`  
+    # `-------**`  
     @periodic_one_life = Life.new @periodic_one_cells, 9, 4
 
     @periodic_two_cells = [[5,0], [6,0],
                            [0,1], [1,1], [2,1], [5,1], [6,1],
                            [7,2], [8,2],
                            [7,3], [8,3]]
-    # Periodic Cells Second Form (Blinker and Beacon)
-    # -----**--
-    # ***--**--
-    # -------**
-    # -------**
+    # Periodic Cells Second Form (Blinker and Beacon)  
+    # `-----**--`  
+    # `***--**--`  
+    # `-------**`  
+    # `-------**`  
     @periodic_two_life = Life.new @periodic_two_cells, 9, 4
   end
 

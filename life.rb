@@ -1,4 +1,4 @@
-# **Life** is a class that implement's [Conway's Game of life][gl],
+# **Life** is a class that implements [Conway's Game of life][gl],
 # a simple [cellular automaton][ca].
 #
 # The Game of Life is "played" on a two-dimensional grid of square cells, each

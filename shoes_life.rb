@@ -1,3 +1,9 @@
+# A simple [Shoes][sh] app to visualize 
+# [my implementation](index.html) of [Conway's Game of life][gl].
+#
+# [sh]: http://shoesrb.com
+# [gl]: http://en.wikipedia.org/wiki/Conway's_Game_of_Life
+
 require 'life'
 
 class GlassBeadGame
@@ -50,10 +56,10 @@ class GlassBeadGame
   end
 end
 
-Shoes.app(:title => 'TDD Game of Life', :height => 500, :width => 500) do
+Shoes.app(:title => 'TDD Game of Life', :height => 300, :width => 300) do
   
   app = self
-  gbg = GlassBeadGame.new [], 50, 50, app
+  gbg = GlassBeadGame.new [], 30, 30, app
   gbg.randomize_cells!
 
   click do |button, x, y|
