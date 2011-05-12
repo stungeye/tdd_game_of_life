@@ -4,7 +4,7 @@ An experiement in test-driven development using Minitest.
 
 Please see:
 
-* [The documented source code](http://stungeye.github.com/tdd_game_of_life/)
+* [The Documented Source Code](http://stungeye.github.com/tdd_game_of_life/)
 * [The Minitest Specs](http://stungeye.github.com/tdd_game_of_life/test_life.html)
 * [The Companion Shoes App](http://stungeye.github.com/tdd_game_of_life/shoes_life.html)
 
