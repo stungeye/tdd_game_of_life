@@ -1,11 +1,11 @@
 # **Life** is a class that implements [Conway's Game of life][gl],
 # a simple [cellular automaton][ca].
 #
-# The Game of Life is "played" on a two-dimensional grid of square cells, each
-# of which is in one of two possible states, alive or dead. Every cell interacts
-# with its eight neighbours.
+# The Game of Life is *"played"* on a two-dimensional grid of square cells, each
+# of which is in one of two possible states, alive or dead. 
 #
-# The game plays out in "ticks". At each step in time, the following 
+# The game plays out in *"ticks"*. At every tick, each cell interacts with
+# its eight neighours. At each of these steps in time, the following 
 # transitions occur:
 #
 # * Any live cell with fewer than two live neighbours dies.
@@ -13,10 +13,11 @@
 # * Any live cell with more than three live neighbours dies.
 # * Any dead cell with exactly three live neighbours becomes a live cell.
 #
-# I implemented this code in a [Test Driven][td] manner in order to practice 
-# TDD and to play with the new Ruby testing library [Minitest][mt].
-#
+# I have implemented this code in a [Test Driven][td] manner in order to 
+# practice TDD and to play with the new Ruby testing library [Minitest][mt].
 # The tests can be found [here](test_life.html).
+#
+# There is also a simple [Shoes app for visualizing the game](shoes_life.rb).
 #
 # The code has been testing using Ruby 1.9.2 and 1.8.7.
 #
@@ -25,41 +26,44 @@
 # [td]: http://en.wikipedia.org/wiki/Test-driven_development
 # [mt]:  http://github.com/seattlerb/minitest
 
-#### Let's Begin
+### In the Beginning was the Word
 
-# Our class has three public getters for retrieving the array of live cells,
-# and the grid dimensions. Unlike a the 'pure' definition of the game, our 
-# grid is not-infinite in size.
+# Our `Life` class has three public getters. One for retrieving the array 
+# of live cells, the other two for the grid dimensions. Unlike the 'pure' 
+# definition of the game, our grid is not infinite in size.
 
 class Life
   attr_reader :cells, :width, :height
 
   # `OutOfBoundsError` is a custom Exception that can be thrown by the 
-  # neighbours method.
+  # `neighbours` method.
   class OutOfBoundsError < ArgumentError; end
 
-  # When constructing our object we need to supply an array of cells, along with 
-  # the dimensions of the grid.
+  # When constructing a `Life` object we need to supply an array of cells 
+  # along with the dimensions of the grid. The array of cells represents only 
+  # live cells. Each cell contains the 2d coordinates of the cell. 
   #
-  # The array of cells represents only live cells, where each cell is represented 
-  # by an array of size 2. The zeroth position representing the x coordinate of 
-  # the cell and the first position representing the y coordinate of the cell.
+  # So, for example, if you had two live cells in the grid, one at x=1 and y=0 
+  # and another at x=2 and y=3, the array would be:
   #
-  # So, for example, if you had two lives cells, one at x=1 and y=0 and another 
-  # at x=2 and y=3, the array would be: `[[1, 0], [2, 3]]`
+  # `[[1, 0], [2, 3]]`
+  #
+  # _**Side Note:** Based on the number of times `x,y` appears in the code, this 
+  # array of arrays should likely be an array of cell objects, or an array of
+  # structs._
   def initialize(cells, width, height)
     @cells = cells
     @width = width
     @height = height
   end
 
-  ####These are the People in Your Neighbourhood
+  ###These are the People in Your Neighbourhood
 
-  # Given two sets of x, y coordinates, are they neighbours?
+  # Given two sets of x, y coordinates, are they `neighbours?`
   def neighbour?(x1, y1, x2, y2)
-    # You are not your own neighbour!
+    # Remember, you are not your own neighbour!
     return false  if x1 == x2 && y1 == y2 
-    # A neighbour is an adjecent cell. In otherword, neither our delta x or our
+    # A neighbour is an adjecent cell. In otherwords, neither our delta x or our
     # delta y can be greater than one.
     (x1 - x2).abs <= 1 && (y1 - y2).abs <= 1
   end
@@ -78,25 +82,25 @@ class Life
     neighbours_found
   end
 
-  #### Life, The Next Generation
+  ### Life, The Next Generation
 
-  # The `next_gen` method generates the outcome of the next "tick" or time-step in
-  # the game.
+  # The `next_gen` method generates the game state of the next tick.
   def next_gen
     # We start with an empty cell array...
     @next_cells = []
     @height.times do |y|
       @width.times do |x|
-        # ...and we add cells that either depending on the rules of the game.
+        # ...and we add cells depending on the rules of the game.
         @next_cells << [x,y]  if should_remain_alive?(x, y) || 
                                  should_come_to_life?(x, y)
       end
     end
-    # Finally we return a new Life object instantiated with the new batch of cells.
+    # Finally we return a new Life object instantiated with the next generation
+    # of cells.
     Life.new @next_cells, @width, @height
   end
 
-  #### The Rules of Life
+  ### The Rules of Life
 
   # Cells that are alive should remain so if they have 2 or 3 neighbours.
   def should_remain_alive?(x,y)
@@ -108,7 +112,7 @@ class Life
     dead?(x,y) && neighbours(x,y) == 3
   end
 
-  #### Helper Methods
+  ### Helper Methods
 
   # A cell at a particular x,y coordinate is alive if it can be found in our 
   # array of `@cells`.
@@ -144,3 +148,6 @@ class Life
     output
   end
 end
+
+#### UNLICENSE
+# _This is free and unencumbered software released into the public domain._

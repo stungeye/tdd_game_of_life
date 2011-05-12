@@ -7,17 +7,36 @@
 require 'minitest/autorun'
 require_relative 'life'
 
+# If you want to run these tests using Ruby 1.8.7 you will have to
+# install the Minitest gem. You will also have to replace the above 
+# two lines with:
+#
+#     require 'rubygems'
+#     require 'minitest/autorun'
+#     require 'life'
+
+### In the Beginning was the Word
+
 describe Life do
+
+  ### Bootstrap
+  #
+  # Let's start by defining all sorts of common game state scenerios.
   before do
+    #### An Empty 5 by 5 Grid
+    #
+    # An empty array and the equivalent string representation.
     @empty_cells = []
     @empty_string = "-----\n" * 5
     @empty_life  = Life.new @empty_cells, 5, 5 
 
+    #### A Crowded Grid
     @crowded_cells = [[0,0], [3,0], [4,0],
                       [3,1], [4,1],
                       [1,2], [2,2], [3,2],
                       [0,3], [1,3], [2,3], [3,3],
                       [0,4], [1,4], [2,4], [3,4], [4,4]]
+    # The string representation of the crowded grid.
     @crowded_string =  "*--**\n"
     @crowded_string << "---**\n"
     @crowded_string << "-***-\n"
@@ -25,42 +44,46 @@ describe Life do
     @crowded_string << "*****\n"
     @crowded_life = Life.new @crowded_cells, 5, 5
 
+    #### Lonely Cells, 5 by 5 Grid
+    #
+    # `*-*-*`  
+    # `-----`  
+    # `*-*-*`  
+    # `-----`  
+    # `*-*-*`  
     @lonely_cells = [[0,0], [2,0], [4,0],
                      [0,2], [2,2], [4,2],
                      [0,4], [2,4], [4,4]]
-    # Lonely Cells:  
-    # `*-*-*`  
-    # `-----`  
-    # `*-*-*`  
-    # `-----`  
-    # `*-*-*`  
     @lonely_life = Life.new @lonely_cells, 5, 5
 
-    @underpopulated_cells = [[0,0],
-                             [0,2],[1,2]]
-    # Underpopulated Cells:  
+    #### Underpopulated Cell, 4 by 4 Grid
+    #
+    # All of these cell should die after one tick.
+    #
     # `*---`  
     # `----`  
     # `**--`  
     # `----`  
+    @underpopulated_cells = [[0,0],
+                             [0,2],[1,2]]
     @underpopulated_life = Life.new @underpopulated_cells, 4, 4
 
-    @goldylocks_cells = [[1,1],
-                        [0,2], [1,2], [2,2]]
-    # Goldylock Cells:  
+    #### Goldylock Cells, 4 by 4 Grid
+    #
+    # These four cells will remain alive, while new cells will appear, in one tick.
+    #
     # `----`  
     # `-*--`  
     # `***-`  
     # `----`  
+    @goldylocks_cells = [[1,1],
+                        [0,2], [1,2], [2,2]]
     @goldylocks_life = Life.new @goldylocks_cells, 4, 4
 
-    @static_cells = [[0,0], [1,0], [4,0], [5,0],
-                     [0,1], [1,1], [4,1], [6,1],
-                     [5,2],
-                     [1,4], [2,4],
-                     [0,5], [3,5],
-                     [1,6], [2,6]]
-    # Static Cells (Includes block, boat and beehive):  
+    #### Static Cells (Includes block, boat and beehive):  
+    #
+    # All cells will remain the same after one tick.
+    #
     # `**--**-`  
     # `**--*-*`  
     # `-----*-`  
@@ -68,31 +91,47 @@ describe Life do
     # `-**----`  
     # `*--*---`  
     # `-**----`  
+    @static_cells = [[0,0], [1,0], [4,0], [5,0],
+                     [0,1], [1,1], [4,1], [6,1],
+                     [5,2],
+                     [1,4], [2,4],
+                     [0,5], [3,5],
+                     [1,6], [2,6]]
     @static_life = Life.new @static_cells, 7, 7
 
+    #### Periodic Cells (Blinker and Beacon) 1st Form
+    #
+    # This grid should become the 2nd Form grid after one tick.
+    #
+    # `-*---**--`  
+    # `-*---*---`  
+    # `-*------*`  
+    # `-------**`  
     @periodic_one_cells = [[1,0], [5,0], [6,0],
                            [1,1], [5,1], 
                            [1,2],
                            [8,2],
                            [7,3], [8,3]]
-    # Periodic Cells First Form (Blinker and Beacon):  
-    # `-*---**--`  
-    # `-*---*---`  
-    # `-*------*`  
-    # `-------**`  
     @periodic_one_life = Life.new @periodic_one_cells, 9, 4
 
-    @periodic_two_cells = [[5,0], [6,0],
-                           [0,1], [1,1], [2,1], [5,1], [6,1],
-                           [7,2], [8,2],
-                           [7,3], [8,3]]
-    # Periodic Cells Second Form (Blinker and Beacon)  
+    #### Periodic Cells (Blinker and Beacon) 2nd Form
+    #
+    # This grid should become the 1st Form grid after one tick.
+    #
     # `-----**--`  
     # `***--**--`  
     # `-------**`  
     # `-------**`  
+    @periodic_two_cells = [[5,0], [6,0],
+                           [0,1], [1,1], [2,1], [5,1], [6,1],
+                           [7,2], [8,2],
+                           [7,3], [8,3]]
     @periodic_two_life = Life.new @periodic_two_cells, 9, 4
   end
+
+  ### Specifying Life
+
+  # I'll let the specs speak for themselves.
 
   describe "when asked for its class" do
     it "must response with Life" do
@@ -120,10 +159,11 @@ describe Life do
 
   describe "when cells have neighbours" do
     it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
-      # Why is the lambda needed? The test fails without it when the exception is raised.
+      # Why is the lambda needed? Without it the tests stop executing when the exception is raised.
       lambda {@crowded_life.neighbours(-1, -1)}.must_raise Life::OutOfBoundsError
     end
     it "must return the correct number of neighbours" do
+      # Is it okay to have so many assertions in a single spec? It feels okay here.
       @crowded_life.neighbours(0, 0).must_equal 0
       @crowded_life.neighbours(1, 0).must_equal 1
       @crowded_life.neighbours(2, 0).must_equal 2
@@ -197,7 +237,7 @@ describe Life do
     end
   end
 
-
 end
 
-
+#### UNLICENSE
+# _This is free and unencumbered software released into the public domain._
