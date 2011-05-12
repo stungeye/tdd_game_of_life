@@ -31,32 +31,99 @@
         <div class="pilwrap">
           <a class="pilcrow" href="#section-1">&#182;</a>
         </div>
-        <p>A simple <a href="http://shoesrb.com">Shoes</a> app to visualize
+        <p>A simple <a href="http://stungeye.com/shoes2011/">Shoes</a> app to visualize
 <a href="index.html">my implementation</a> of <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway&rsquo;s Game of life</a>.</p>
-
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;life&#39;</span>
-
-<span class="k">class</span> <span class="nc">GlassBeadGame</span>
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
-    <span class="vi">@app</span> <span class="o">=</span> <span class="n">app</span>
-    <span class="vi">@app</span><span class="o">.</span><span class="n">nostroke</span>
-    <span class="vi">@cell_width</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">width</span>  <span class="o">/</span> <span class="n">width</span> 
+        <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;life&#39;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Das_Glasperlenspiel'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Das_Glasperlenspiel">&#182;</a>
+        </div>
+        <h2>Das Glasperlenspiel</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>The <code>GlassBeadGame</code> wraps our <code>Life</code> class for use with Shoes.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">class</span> <span class="nc">GlassBeadGame</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>The Shoes app, defined below this class, is saved as <code>@app</code>.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="vi">@app</span> <span class="o">=</span> <span class="n">app</span>
+    <span class="vi">@app</span><span class="o">.</span><span class="n">nostroke</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>Scale the cells according to the size of the grid.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="vi">@cell_width</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">width</span>  <span class="o">/</span> <span class="n">width</span> 
     <span class="vi">@cell_height</span> <span class="o">=</span> <span class="vi">@app</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">height</span> 
     <span class="vi">@life</span> <span class="o">=</span> <span class="no">Life</span><span class="o">.</span><span class="n">new</span> <span class="n">cells</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span>  
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">tick</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>Time keeps on ticking, ticking, into the future.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">tick</span>
     <span class="vi">@life</span> <span class="o">=</span> <span class="vi">@life</span><span class="o">.</span><span class="n">next_gen</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">draw</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
+        <p>Clear the screen and redraw all the cells.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">draw</span>
     <span class="vi">@app</span><span class="o">.</span><span class="n">clear</span>
     <span class="vi">@life</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">coordinates</span><span class="o">|</span>
       <span class="n">x</span> <span class="o">=</span> <span class="n">coordinates</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
-      <span class="n">y</span> <span class="o">=</span> <span class="n">coordinates</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-      <span class="k">if</span> <span class="vi">@life</span><span class="o">.</span><span class="n">should_remain_alive?</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+      <span class="n">y</span> <span class="o">=</span> <span class="n">coordinates</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-8'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-8">&#182;</a>
+        </div>
+        <p>Cells that are going to live look different from dying cells.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="k">if</span> <span class="vi">@life</span><span class="o">.</span><span class="n">should_remain_alive?</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="vi">@app</span><span class="o">.</span><span class="n">fill</span> <span class="n">rgb</span><span class="p">(</span><span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0xBB</span><span class="p">)</span>
       <span class="k">else</span>
         <span class="vi">@app</span><span class="o">.</span><span class="n">fill</span> <span class="n">rgb</span><span class="p">(</span><span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">)</span>
@@ -66,43 +133,122 @@
                 <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="vi">@cell_width</span><span class="p">,</span>
                 <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="vi">@cell_height</span>
     <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="mi">1</span> 
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p>Mouse clicks are our only user interactions.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-10'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-10">&#182;</a>
+        </div>
+        <p>Left Click: Bring a dead cell to life.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="mi">1</span> 
       <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="vi">@cell_width</span>
       <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="vi">@cell_height</span>
       <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">draw</span>
-    <span class="k">else</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">draw</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-11">&#182;</a>
+        </div>
+        <p>Right Click: Re-seed the grid.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">else</span>
       <span class="n">randomize_cells!</span>
     <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">randomize_cells!</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-12'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-12">&#182;</a>
+        </div>
+        <p>When randomizing the cells, there&rsquo;s a 50% chance each cells will be alive.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">randomize_cells!</span>
     <span class="vi">@life</span><span class="o">.</span><span class="n">height</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">y</span><span class="o">|</span>
       <span class="vi">@life</span><span class="o">.</span><span class="n">width</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
         <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>  <span class="k">if</span> <span class="nb">rand</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s1">&#39;TDD Game of Life&#39;</span><span class="p">,</span> <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="k">do</span>
-  
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-The_Shoes_App'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-The_Shoes_App">&#182;</a>
+        </div>
+        <h3>The Shoes App</h3>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s1">&#39;TDD Game of Life&#39;</span><span class="p">,</span> <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">)</span> <span class="k">do</span>
   <span class="n">app</span> <span class="o">=</span> <span class="nb">self</span>
-  <span class="n">gbg</span> <span class="o">=</span> <span class="no">GlassBeadGame</span><span class="o">.</span><span class="n">new</span> <span class="o">[]</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">app</span>
-  <span class="n">gbg</span><span class="o">.</span><span class="n">randomize_cells!</span>
+  <span class="n">gbg</span> <span class="o">=</span> <span class="no">GlassBeadGame</span><span class="o">.</span><span class="n">new</span> <span class="o">[]</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">app</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-14'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-14">&#182;</a>
+        </div>
+        <p>To start, the Grid is seeded with random cells.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">gbg</span><span class="o">.</span><span class="n">randomize_cells!</span>
 
   <span class="n">click</span> <span class="k">do</span> <span class="o">|</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">|</span>
     <span class="n">gbg</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  
-  <span class="k">end</span>
-
-  <span class="n">animate</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">do</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-15'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-15">&#182;</a>
+        </div>
+        <p>Attempt to generate and draw eight ticks a second.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">animate</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">do</span>
     <span class="n">gbg</span><span class="o">.</span><span class="n">tick</span>
     <span class="n">gbg</span><span class="o">.</span><span class="n">draw</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-UNLICENSE'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-UNLICENSE">&#182;</a>
+        </div>
+        <h3>UNLICENSE</h3>
+
+<p><em>This is free and unencumbered software released into the public domain.</em></p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
   </table>

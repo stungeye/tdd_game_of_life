@@ -35,10 +35,10 @@
 a simple <a href="http://en.wikipedia.org/wiki/Cellular_automaton">cellular automaton</a>.</p>
 
 <p>The Game of Life is &ldquo;played&rdquo; on a two-dimensional grid of square cells, each
-of which is in one of two possible states, alive or dead. Every cell interacts
-with its eight neighbours.</p>
+of which is in one of two possible states, alive or dead.</p>
 
-<p>The game plays out in &ldquo;ticks&rdquo;. At each step in time, the following
+<p>The game plays out in time-steps called ticks. At every tick, each cell
+interacts with its eight neighours. At each step, the following
 transitions occur:</p>
 
 <ul>
@@ -49,24 +49,24 @@ transitions occur:</p>
 </ul>
 
 
-<p>I implemented this code in a <a href="http://en.wikipedia.org/wiki/Test-driven_development">Test Driven</a> manner in order to practice
-TDD and to play with the new Ruby testing library <a href="http://github.com/seattlerb/minitest">Minitest</a>.</p>
+<p>I have implemented this code in a <a href="http://en.wikipedia.org/wiki/Test-driven_development">Test Driven</a> manner in order to
+practice TDD and to play with the new Ruby testing library <a href="http://github.com/seattlerb/minitest">Minitest</a>.
+The tests can be found <a href="test_life.html">here</a>.</p>
 
-<p>The tests can be found <a href="test_life.html">here</a>. There is also a simple
-<a href="http://shoesrb.com">Shoes</a> app to <a href="shoes_life.html">visualize the game</a>.</p>
+<p>There is also a simple <a href="shoes_life.rb">Shoes app for visualizing the game</a>.</p>
 
-<p>The code has been testing using Ruby 1.9.2 and 1.8.7.</p>
+<p>The code has been tested using Ruby 1.9.2 and 1.8.7.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
       </td>
     </tr>
-    <tr id='section-Let&amp;rsquo;s_Begin'>
+    <tr id='section-In_the_Beginning_was_the_Word'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-Let&amp;rsquo;s_Begin">&#182;</a>
+          <a class="pilcrow" href="#section-In_the_Beginning_was_the_Word">&#182;</a>
         </div>
-        <h3>Let&rsquo;s Begin</h3>
+        <h2>In the Beginning was the Word</h2>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -77,9 +77,9 @@ TDD and to play with the new Ruby testing library <a href="http://github.com/sea
         <div class="pilwrap">
           <a class="pilcrow" href="#section-3">&#182;</a>
         </div>
-        <p>Our class has three public getters for retrieving the array of live cells,
-and the grid dimensions. Unlike a the &lsquo;pure&rsquo; definition of the game, our
-grid is not-infinite in size.</p>
+        <p>Our <code>Life</code> class has three public getters. One for retrieving the array
+of live cells, the other two for the grid dimensions. Unlike the &lsquo;pure&rsquo;
+definition of the game, our grid is not infinite in size.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">class</span> <span class="nc">Life</span>
@@ -92,7 +92,7 @@ grid is not-infinite in size.</p>
           <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p><code>OutOfBoundsError</code> is a custom Exception that can be thrown by the
-neighbours method.</p>
+<code>neighbours</code> method.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">OutOfBoundsError</span> <span class="o">&lt;</span> <span class="no">ArgumentError</span><span class="p">;</span> <span class="k">end</span></pre></div>
@@ -103,15 +103,18 @@ neighbours method.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
-        <p>When constructing our object we need to supply an array of cells, along with
-the dimensions of the grid.</p>
+        <p>When constructing a <code>Life</code> object we need to supply an array of cells
+along with the dimensions of the grid. The array of cells represents only
+live cells. Each cell contains the 2d coordinates of the cell.</p>
 
-<p>The array of cells represents only live cells, where each cell is represented
-by an array of size 2. The zeroth position representing the x coordinate of
-the cell and the first position representing the y coordinate of the cell.</p>
+<p>So, for example, if you had two live cells in the grid, one at x=1 and y=0
+and another at x=2 and y=3, the array would be:</p>
 
-<p>So, for example, if you had two lives cells, one at x=1 and y=0 and another
-at x=2 and y=3, the array would be: <code>[[1, 0], [2, 3]]</code></p>
+<p><code>[[1, 0], [2, 3]]</code></p>
+
+<p><em><strong>Side Note:</strong> Based on the number of times <code>x,y</code> appears in the code, this
+array of arrays should likely be an array of cell objects, or an array of
+structs.</em></p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
@@ -126,7 +129,7 @@ at x=2 and y=3, the array would be: <code>[[1, 0], [2, 3]]</code></p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-These_are_the_People_in_Your_Neighbourhood">&#182;</a>
         </div>
-        <h3>These are the People in Your Neighbourhood</h3>
+        <h2>These are the People in Your Neighbourhood</h2>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -137,7 +140,7 @@ at x=2 and y=3, the array would be: <code>[[1, 0], [2, 3]]</code></p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
-        <p>Given two sets of x, y coordinates, are they neighbours?</p>
+        <p>Given two sets of x, y coordinates, are they <code>neighbours?</code></p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">neighbour?</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span></pre></div>
@@ -148,7 +151,7 @@ at x=2 and y=3, the array would be: <code>[[1, 0], [2, 3]]</code></p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
-        <p>You are not your own neighbour!</p>
+        <p>Remember, you are not your own neighbour!</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">return</span> <span class="kp">false</span>  <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span> <span class="o">==</span> <span class="n">y2</span> </pre></div>
@@ -159,7 +162,7 @@ at x=2 and y=3, the array would be: <code>[[1, 0], [2, 3]]</code></p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
-        <p>A neighbour is an adjecent cell. In otherword, neither our delta x or our
+        <p>A neighbour is an adjecent cell. In otherwords, neither our delta x or our
 delta y can be greater than one.</p>
       </td>
       <td class=code>
@@ -212,7 +215,7 @@ as our cells count grows.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-Life,_The_Next_Generation">&#182;</a>
         </div>
-        <h3>Life, The Next Generation</h3>
+        <h2>Life, The Next Generation</h2>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -223,8 +226,7 @@ as our cells count grows.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
-        <p>The <code>next_gen</code> method generates the outcome of the next &ldquo;tick&rdquo; or time-step in
-the game.</p>
+        <p>The <code>next_gen</code> method generates the game state of the next tick.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">next_gen</span></pre></div>
@@ -248,7 +250,7 @@ the game.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-16">&#182;</a>
         </div>
-        <p>&hellip;and we add cells that either depending on the rules of the game.</p>
+        <p>&hellip;and we add cells depending on the rules of the game.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>        <span class="vi">@next_cells</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">]</span>  <span class="k">if</span> <span class="n">should_remain_alive?</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">||</span> 
@@ -262,7 +264,8 @@ the game.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-17">&#182;</a>
         </div>
-        <p>Finally we return a new Life object instantiated with the new batch of cells.</p>
+        <p>Finally we return a new Life object instantiated with the next generation
+of cells.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="no">Life</span><span class="o">.</span><span class="n">new</span> <span class="vi">@next_cells</span><span class="p">,</span> <span class="vi">@width</span><span class="p">,</span> <span class="vi">@height</span>
@@ -274,7 +277,7 @@ the game.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-The_Rules_of_Life">&#182;</a>
         </div>
-        <h3>The Rules of Life</h3>
+        <h2>The Rules of Life</h2>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -311,7 +314,7 @@ the game.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-Helper_Methods">&#182;</a>
         </div>
-        <h3>Helper Methods</h3>
+        <h2>Helper Methods</h2>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -379,7 +382,6 @@ array of <code>@cells</code>.</p>
         </div>
         <p>Our Life object can output a string representation of itself. Live cells are
 shown as asteriks and dead cells as minus signs.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">to_s</span> 
@@ -393,6 +395,20 @@ shown as asteriks and dead cells as minus signs.</p>
     <span class="n">output</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-UNLICENSE'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-UNLICENSE">&#182;</a>
+        </div>
+        <h3>UNLICENSE</h3>
+
+<p><em>This is free and unencumbered software released into the public domain.</em></p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
   </table>
