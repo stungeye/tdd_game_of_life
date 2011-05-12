@@ -21,10 +21,13 @@
 #
 # The code has been tested using Ruby 1.9.2 and 1.8.7.
 #
+# Github Repo: [/stungeye/tdd_gam_of_life][gh]
+#
 # [gl]: http://en.wikipedia.org/wiki/Conway's_Game_of_Life
-# [ca]:  http://en.wikipedia.org/wiki/Cellular_automaton
+# [ca]: http://en.wikipedia.org/wiki/Cellular_automaton
 # [td]: http://en.wikipedia.org/wiki/Test-driven_development
-# [mt]:  http://github.com/seattlerb/minitest
+# [mt]: http://github.com/seattlerb/minitest
+# [gh]: https://github.com/stungeye/tdd_game_of_life/
 
 ### In the Beginning was the Word
 
