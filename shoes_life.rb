@@ -13,6 +13,7 @@ require 'life'
 
 class GlassBeadGame
   def initialize(cells, width, height, app)
+    # The Shoes app, defined below this class, is saved as `@app`.
     @app = app
     @app.nostroke
     # Scale the cells according to the size of the grid.
@@ -21,10 +22,12 @@ class GlassBeadGame
     @life = Life.new cells, width, height  
   end
 
+  # Time keeps on ticking, ticking, into the future.
   def tick
     @life = @life.next_gen
   end
 
+  # Clear the screen and redraw all the cells.
   def draw
     @app.clear
     @life.cells.each do |coordinates|
@@ -43,6 +46,7 @@ class GlassBeadGame
     end
   end
 
+  # Mouse clicks are our only user interactions.
   def click(button, x, y)
     # Left Click: Bring a dead cell to life.  
     if button == 1 
@@ -56,7 +60,7 @@ class GlassBeadGame
     end
   end
 
-  # There's a 50% chance each cells could be alive.
+  # When randomizing the cells, there's a 50% chance each cells will be alive.
   def randomize_cells!
     @life.height.times do |y|
       @life.width.times do |x|
@@ -65,6 +69,8 @@ class GlassBeadGame
     end
   end
 end
+
+#### The Shoes App
 
 Shoes.app(:title => 'TDD Game of Life', :height => 300, :width => 300) do
   app = self

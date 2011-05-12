@@ -8,20 +8,20 @@ require 'minitest/autorun'
 require_relative 'life'
 
 # If you want to run these tests using Ruby 1.8.7 you will have to
-# install the Minitest gem. You will also have to replace the above 
-# two lines with:
+# install the Minitest gem. You will also have to replace the two 
+# require statements with:
 #
 #     require 'rubygems'
 #     require 'minitest/autorun'
 #     require 'life'
 
-### In the Beginning was the Word
+### MiniTests Implemented As Specs
 
 describe Life do
 
-  ### Bootstrap
+  #### Bootstrap
   #
-  # Let's start by defining all sorts of common game state scenerios.
+  # Let's start by defining a collection of common game state scenerios.
   before do
     #### An Empty 5 by 5 Grid
     #
@@ -159,11 +159,11 @@ describe Life do
 
   describe "when cells have neighbours" do
     it "must raise an OutOfBounds exception if we request an out of bounds coordinate" do
-      # Why is the lambda needed? Without it the tests stop executing when the exception is raised.
+      # _Why is the lambda needed?_ Without it the tests stop executing when the exception is raised.
       lambda {@crowded_life.neighbours(-1, -1)}.must_raise Life::OutOfBoundsError
     end
     it "must return the correct number of neighbours" do
-      # Is it okay to have so many assertions in a single spec? It feels okay here.
+      # _Is it okay to have so many assertions in a single spec?_ It feels okay here.
       @crowded_life.neighbours(0, 0).must_equal 0
       @crowded_life.neighbours(1, 0).must_equal 1
       @crowded_life.neighbours(2, 0).must_equal 2

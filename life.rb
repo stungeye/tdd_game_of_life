@@ -1,11 +1,11 @@
 # **Life** is a class that implements [Conway's Game of life][gl],
 # a simple [cellular automaton][ca].
 #
-# The Game of Life is *"played"* on a two-dimensional grid of square cells, each
+# The Game of Life is "played" on a two-dimensional grid of square cells, each
 # of which is in one of two possible states, alive or dead. 
 #
-# The game plays out in *"ticks"*. At every tick, each cell interacts with
-# its eight neighours. At each of these steps in time, the following 
+# The game plays out in time-steps called ticks. At every tick, each cell 
+# interacts with its eight neighours. At each step, the following 
 # transitions occur:
 #
 # * Any live cell with fewer than two live neighbours dies.
@@ -19,7 +19,7 @@
 #
 # There is also a simple [Shoes app for visualizing the game](shoes_life.rb).
 #
-# The code has been testing using Ruby 1.9.2 and 1.8.7.
+# The code has been tested using Ruby 1.9.2 and 1.8.7.
 #
 # [gl]: http://en.wikipedia.org/wiki/Conway's_Game_of_Life
 # [ca]:  http://en.wikipedia.org/wiki/Cellular_automaton
