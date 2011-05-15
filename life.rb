@@ -129,7 +129,8 @@ class Life
   end
 
   # Allow us to bring specific cells to life, as long as they aren't already alive.
-  def set_cell_alive(x, y)
+  # This method is only used in the Shoes GUI.
+  def set_cell_alive!(x, y)
     @cells << [x, y]  if !alive?(x,y)
   end
  

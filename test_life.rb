@@ -1,4 +1,4 @@
-# These are the [Minitest][mt] specs for 
+## These are the [Minitest][mt] specs for 
 # [my implementation](index.html) of [Conway's Game of life][gl].
 #
 # [mt]:  http://github.com/seattlerb/minitest
@@ -229,10 +229,11 @@ describe Life do
     end
   end
 
+  # This is the only spec for mutable behaviour. It feels a little dirty. 
   describe "when a cell it set as alive" do
     it "must be read back as alive" do
       @life = @empty_life
-      @life.set_cell_alive 2, 2
+      @life.set_cell_alive! 2, 2
       @life.alive?(2, 2).must_equal true
     end
   end

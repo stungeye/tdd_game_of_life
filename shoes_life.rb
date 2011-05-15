@@ -52,7 +52,7 @@ class GlassBeadGame
     if button == 1 
       x = x / @cell_width
       y = y / @cell_height
-      @life.set_cell_alive x, y
+      @life.set_cell_alive! x, y
       self.draw
     # Right Click: Re-seed the grid.
     else
@@ -64,7 +64,7 @@ class GlassBeadGame
   def randomize_cells!
     @life.height.times do |y|
       @life.width.times do |x|
-        @life.set_cell_alive x, y  if rand > 0.5
+        @life.set_cell_alive! x, y  if rand > 0.5
       end
     end
   end
