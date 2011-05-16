@@ -26,13 +26,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr id='section-1'>
+    <tr id='section-These_are_the_&lt;a_href=&quot;http://github.com/seattlerb/minitest&quot;&gt;Minitest&lt;/a&gt;_specs_for'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-1">&#182;</a>
+          <a class="pilcrow" href="#section-These_are_the_&lt;a_href=&quot;http://github.com/seattlerb/minitest&quot;&gt;Minitest&lt;/a&gt;_specs_for">&#182;</a>
         </div>
-        <p>These are the <a href="http://github.com/seattlerb/minitest">Minitest</a> specs for
-<a href="index.html">my implementation</a> of <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway&rsquo;s Game of life</a>.</p>
+        <h1>These are the <a href="http://github.com/seattlerb/minitest">Minitest</a> specs for</h1>
+
+<p><a href="index.html">my implementation</a> of <a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Conway&rsquo;s Game of life</a>.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="nb">require</span> <span class="s1">&#39;minitest/autorun&#39;</span>
@@ -391,12 +392,21 @@ require 'life'
       <span class="vi">@next_gen</span> <span class="o">=</span> <span class="vi">@periodic_two_life</span><span class="o">.</span><span class="n">next_gen</span>
       <span class="vi">@next_gen</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">must_equal</span> <span class="vi">@periodic_one_cells</span>
     <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="n">describe</span> <span class="s2">&quot;when a cell it set as alive&quot;</span> <span class="k">do</span>
+  <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-18'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-18">&#182;</a>
+        </div>
+        <p>This is the only spec for mutable behaviour. It feels a little dirty.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  <span class="n">describe</span> <span class="s2">&quot;when a cell it set as alive&quot;</span> <span class="k">do</span>
     <span class="n">it</span> <span class="s2">&quot;must be read back as alive&quot;</span> <span class="k">do</span>
       <span class="vi">@life</span> <span class="o">=</span> <span class="vi">@empty_life</span>
-      <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+      <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive!</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
       <span class="vi">@life</span><span class="o">.</span><span class="n">alive?</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">must_equal</span> <span class="kp">true</span>
     <span class="k">end</span>
   <span class="k">end</span>

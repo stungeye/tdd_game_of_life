@@ -158,7 +158,7 @@
         <div class='highlight'><pre>    <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="mi">1</span> 
       <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="vi">@cell_width</span>
       <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">/</span> <span class="vi">@cell_height</span>
-      <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+      <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive!</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
       <span class="nb">self</span><span class="o">.</span><span class="n">draw</span></pre></div>
       </td>
     </tr>
@@ -187,7 +187,7 @@
         <div class='highlight'><pre>  <span class="k">def</span> <span class="nf">randomize_cells!</span>
     <span class="vi">@life</span><span class="o">.</span><span class="n">height</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">y</span><span class="o">|</span>
       <span class="vi">@life</span><span class="o">.</span><span class="n">width</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
-        <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>  <span class="k">if</span> <span class="nb">rand</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+        <span class="vi">@life</span><span class="o">.</span><span class="n">set_cell_alive!</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>  <span class="k">if</span> <span class="nb">rand</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
